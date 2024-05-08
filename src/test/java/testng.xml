@@ -1,0 +1,6 @@
+<test>
+    <parameter name="firstName" value="firstName"/>
+    <parameter name="lastName" value="lastName"/>
+    <parameter name="specialty" value="surgery"/>
+</test>
+
