@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.MainPage;
+import pages.OwnersAddNewPage;
 import pages.OwnersSearchPage;
 
 public class UITests {
@@ -12,6 +13,7 @@ public class UITests {
     public final String petclinicURL = "http://localhost:8080";
     public MainPage mainPage;
     public OwnersSearchPage ownersSearchPage;
+    public OwnersAddNewPage ownersAddNewPage;
 
     @BeforeTest
     public void beforeTest(){
@@ -43,5 +45,21 @@ public class UITests {
         String fullName = ownersSearchPage.searchForOwnerAndCheckIfExists(firstName, lastName);
         Assert.assertEquals(fullName, firstName+" "+lastName);
         System.out.println("Owner named "+fullName+" is in database");
+    }
+
+    @DataProvider(name = "newUserToCreate")
+    public Object[][] newUserToCreate() {
+        return new Object[][] {
+                { "firstName", "lastName", "address", "city", 123456789 },
+        };
+    }
+
+    @Test(dataProvider = "newUserToCreate")
+    public void createNewOwner(String firstName, String lastName, String address, String city, int telephone){
+        loadMainPage();
+        ownersAddNewPage = mainPage.navigateToOwnersAddNewPage();
+        ownersAddNewPage.addNewOwner(firstName, lastName, address, city, telephone);
+        searchForUser(firstName,lastName);
+
     }
 }

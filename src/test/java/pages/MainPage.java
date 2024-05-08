@@ -15,9 +15,17 @@ public class MainPage extends BasePage{
     @FindBy(how = How.XPATH, using = "//a[@routerlink='/owners']")
     private WebElement navOwnersSearch;
 
+    @FindBy(how = How.XPATH, using = "//a[@routerlink='/owners/add']")
+    private WebElement navOwnersAddNew;
+
     public OwnersSearchPage navigateToOwnersSearchPage(){
         waitThenClick(navOwners);
         waitThenClick(navOwnersSearch);
         return new OwnersSearchPage(driver);
+    }
+    public OwnersAddNewPage navigateToOwnersAddNewPage(){
+        waitThenClick(navOwners);
+        waitThenClick(navOwnersAddNew);
+        return new OwnersAddNewPage(driver);
     }
 }
