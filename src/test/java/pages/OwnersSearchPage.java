@@ -35,4 +35,12 @@ public class OwnersSearchPage extends MainPage {
         }
         return fullName;
     }
+    public OwnersInformationPage navigateToOwnersInformationPage(String firstName, String lastName){
+        for (WebElement element : ownersSearchVisibleElementsInTable){
+            if (element.getText().equals(firstName+" "+lastName) ){
+                waitThenClick(element);
+            }
+        }
+        return new OwnersInformationPage(driver);
+    }
 }

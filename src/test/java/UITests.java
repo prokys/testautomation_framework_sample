@@ -4,9 +4,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import pages.MainPage;
-import pages.OwnersAddNewPage;
-import pages.OwnersSearchPage;
+import pages.*;
 
 public class UITests {
     public WebDriver driver;
@@ -14,6 +12,8 @@ public class UITests {
     public MainPage mainPage;
     public OwnersSearchPage ownersSearchPage;
     public OwnersAddNewPage ownersAddNewPage;
+    public OwnersInformationPage ownersInformationPage;
+    public OwnersEditPage ownersEditPage;
 
     @BeforeTest
     public void beforeTest(){
@@ -60,6 +60,20 @@ public class UITests {
         ownersAddNewPage = mainPage.navigateToOwnersAddNewPage();
         ownersAddNewPage.addNewOwner(firstName, lastName, address, city, telephone);
         searchForUser(firstName,lastName);
-
+    }
+    @DataProvider(name = "editExistingOwnerTo")
+    public Object[][] editExistingOwnerTo() {
+        return new Object[][] {
+                { "firstName", "lastName", "firstNameEdited", "lastNameEdited", "addressEdited", "cityEdited", 987654321 },
+        };
+    }
+    @Test(dataProvider = "editExistingOwnerTo")
+    public void editExistingOwner(String firstName, String lastName, String firstNameEdited, String lastNameEdited, String addressEdited, String cityEdited, int telephoneEdited){
+        loadMainPage();
+        searchForUser(firstName, lastName);
+        ownersInformationPage = ownersSearchPage.navigateToOwnersInformationPage(firstName, lastName);
+        ownersEditPage = ownersInformationPage.navigateToOwnersEditPage();
+        ownersEditPage.editOwner(firstNameEdited, lastNameEdited, addressEdited, cityEdited, telephoneEdited);
+        searchForUser(firstNameEdited, lastNameEdited);
     }
 }
