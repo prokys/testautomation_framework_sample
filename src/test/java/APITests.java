@@ -59,4 +59,20 @@ public class APITests {
         checkIfVetIsInDatabase(firstName, lastName, specialty);
     }
 
+    @DataProvider(name = "editVetData")
+    public Object[][] editVetData() {
+        return new Object[][] {
+                { "firstName", "lastName", "surgery", "firstNameEdited", "lastNameEdited", "surgeryEdited"},
+        };
+    }
+
+    @Test(dataProvider = "editVetData")
+    public void editVeterinarianToWithSpecialty(String firstName, String lastName, String specialty, String firstNameEdited, String lastNameEdited, String specialtyEdited) {
+        checkIfVetIsInDatabase(firstName, lastName, specialty);
+        String requestBody = "{\"firstName\": \""+firstNameEdited+"\", \"lastName\": \""+lastNameEdited+"\", \"specialties\": [{\"name\": \""+specialtyEdited+"\"}]}";
+        response = given().contentType(ContentType.JSON).body(requestBody).when().put(vetsAPIUrl+"/"+vetID);
+        Assert.assertEquals(response.then().extract().statusCode(), 204);
+        System.out.println("User edited to: "+firstNameEdited+" "+lastNameEdited);
+    }
+
 }
