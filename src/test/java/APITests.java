@@ -74,5 +74,11 @@ public class APITests {
         Assert.assertEquals(response.then().extract().statusCode(), 204);
         System.out.println("User edited to: "+firstNameEdited+" "+lastNameEdited);
     }
-
+    @Test(dataProvider = "newVetData")
+    public void deleteVeterinarianWithSpecialtyFromDatabase(String firstName, String lastName, String specialty) {
+        checkIfVetIsInDatabase(firstName, lastName, specialty);
+        response = when().delete(vetsAPIUrl+"/"+vetID);
+        Assert.assertEquals(response.then().extract().statusCode(), 204);
+        System.out.println("User"+firstName+" "+lastName+" with specialty "+specialty+" deleted from database");
+    }
 }
