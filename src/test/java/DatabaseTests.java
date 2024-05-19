@@ -61,4 +61,16 @@ public class DatabaseTests {
         Assert.assertEquals(affectedRows, 1);
         System.out.println("Pet type " + oldPetType + " updated to " + newPetType);
     }
+    @DataProvider(name = "editedPetType")
+    public Object[][] editedPetType() {
+        return new Object[][] {
+                {"fish"},
+        };
+    }
+    @Test(dataProvider = "editedPetType")
+    public void deletePetTypeFromDatabase(String petType) {
+        affectedRows = PostgresUtils.executeStatement("DELETE FROM types WHERE name='"+petType+"'");
+        Assert.assertEquals(affectedRows,1);
+        System.out.println("Pet type "+petType+ " deleted from database");
+    }
 }
