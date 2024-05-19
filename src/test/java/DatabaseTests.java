@@ -49,4 +49,16 @@ public class DatabaseTests {
         Assert.assertEquals(affectedRows,1);
         System.out.println("Pet type "+petType+ " added into database");
     }
+    @DataProvider(name = "oldAndNewPetType")
+    public Object[][] oldAndNewPetType() {
+        return new Object[][] {
+                {"monkey", "fish"},
+        };
+    }
+    @Test(dataProvider = "oldAndNewPetType")
+    public void updatePetTypeTo(String oldPetType, String newPetType) {
+        affectedRows = PostgresUtils.executeStatement("UPDATE types SET name='" + newPetType + "' WHERE name='" + oldPetType + "'");
+        Assert.assertEquals(affectedRows, 1);
+        System.out.println("Pet type " + oldPetType + " updated to " + newPetType);
+    }
 }
