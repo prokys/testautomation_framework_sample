@@ -1,3 +1,4 @@
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DatabaseTests {
+    int affectedRows;
 
     @BeforeTest
     public void connectToDb(){
@@ -34,5 +36,17 @@ public class DatabaseTests {
         } else  {
             System.out.println("Something went wrong");
         }
+    }
+    @DataProvider(name = "newPetType")
+    public Object[][] newPetType() {
+        return new Object[][] {
+                {"monkey"},
+        };
+    }
+    @Test(dataProvider = "newPetType")
+    public void createNewPetType(String petType) {
+        affectedRows = PostgresUtils.executeStatement("INSERT INTO types (name) VALUES ('"+petType+"')");
+        Assert.assertEquals(affectedRows,1);
+        System.out.println("Pet type "+petType+ " added into database");
     }
 }
