@@ -1,10 +1,9 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.*;
+import utils.DriverUtils;
 
 public class UITests {
     public WebDriver driver;
@@ -17,14 +16,12 @@ public class UITests {
 
     @BeforeTest
     public void beforeTest(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
 
-        driver = new ChromeDriver(options);
+        driver = DriverUtils.initDriver("firefox");
     }
     @AfterTest
-    public void afterTest(){
-        driver.quit();
+    public void afterTest() {
+        DriverUtils.quitDriver();
     }
     @Test
     public void loadMainPage(){
