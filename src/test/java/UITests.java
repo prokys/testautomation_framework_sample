@@ -4,10 +4,11 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.*;
 import utils.DriverUtils;
+import utils.PropertiesUtils;
 
 public class UITests {
     public WebDriver driver;
-    public final String petclinicURL = "http://localhost:8080";
+
     public MainPage mainPage;
     public OwnersSearchPage ownersSearchPage;
     public OwnersAddNewPage ownersAddNewPage;
@@ -16,8 +17,8 @@ public class UITests {
 
     @BeforeTest
     public void beforeTest(){
-
-        driver = DriverUtils.initDriver("firefox");
+        PropertiesUtils.loadEnvironmentConfiguration();
+        driver = DriverUtils.initDriver(PropertiesUtils.getBrowserName());
     }
     @AfterTest
     public void afterTest() {
@@ -25,7 +26,7 @@ public class UITests {
     }
     @Test
     public void loadMainPage(){
-        driver.get(petclinicURL);
+        driver.get(PropertiesUtils.getApplicationUrl());
         Assert.assertEquals(driver.findElement(By.xpath("//h1[@class='title']")).getText(), "Welcome to Petclinic");
         mainPage = new MainPage(driver);
     }

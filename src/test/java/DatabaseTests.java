@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import utils.PostgresUtils;
+import utils.PropertiesUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ public class DatabaseTests {
 
     @BeforeTest
     public void connectToDb(){
+        PropertiesUtils.loadEnvironmentConfiguration();
         PostgresUtils.connectToDb();
     }
     @AfterTest

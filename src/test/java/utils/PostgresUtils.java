@@ -13,7 +13,7 @@ public class PostgresUtils {
 
     public static void connectToDb(){
 
-        String connectionUri = "jdbc:postgresql://localhost:5431/petclinic?user=postgres&password=petclinic";
+        String connectionUri = PropertiesUtils.getDatabaseConnectionString();
 
         try {
             conn = DriverManager.getConnection(connectionUri);
