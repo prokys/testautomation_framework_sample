@@ -25,6 +25,10 @@ public class PropertiesUtils {
 
     public static void loadEnvironmentConfiguration(){
         String environment = System.getProperty("environment");
+        if (environment == null){
+            environment = "test";
+            System.out.println("Environment not set, using test as default");
+        }
         String environmentPropertiesFilePath = "src/test/resources/environments/" + environment.toLowerCase() + ".properties";
 
         try{
@@ -32,7 +36,15 @@ public class PropertiesUtils {
             environmentProperties.load(new FileInputStream(environmentPropertiesFilePath));
 
             browserName = environmentProperties.getProperty("browser.name");
+            if (browserName == null){
+                browserName = "chrome";
+                System.out.println("Browser name not provided, using chrome as default");
+            }
             explicitWait = environmentProperties.getProperty("explicit.wait");
+            if (explicitWait == null){
+                explicitWait = "30";
+                System.out.println("Explicit wait not provided, using 30 as default");
+            }
             applicationUrl = environmentProperties.getProperty("application.url");
             databaseConnectionString = environmentProperties.getProperty("database.connection.string");
         }
