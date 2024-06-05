@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class OwnersSearchPage extends MainPage {
             @FindBy (how = How.XPATH, using = "//td//a[@routerlinkactive='active']"))
     private List<WebElement> ownersSearchVisibleElementsInTable;
 
-    public String searchForOwnerAndCheckIfExists(String firstName, String lastName){
+    public void searchForOwnerAndCheckIfExists(String firstName, String lastName){
         String fullName = "";
         waitThenSendKeys(ownersSearchInput, lastName);
         waitThenClick(ownersSearchFindOwnerButton);
@@ -33,7 +34,7 @@ public class OwnersSearchPage extends MainPage {
                 fullName = firstName+" "+lastName;
             }
         }
-        return fullName;
+        Assert.assertEquals(fullName, firstName+" "+lastName);
     }
     public OwnersInformationPage navigateToOwnersInformationPage(String firstName, String lastName){
         for (WebElement element : ownersSearchVisibleElementsInTable){

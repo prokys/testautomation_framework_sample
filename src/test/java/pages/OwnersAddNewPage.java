@@ -28,12 +28,13 @@ public class OwnersAddNewPage extends MainPage{
     @FindBy(how = How.XPATH, using = "//button[@type='submit']")
     private WebElement ownersAddNewAddOwnerButton;
 
-    public void addNewOwner (String firstName, String lastName, String address, String city, int telephone){
+    public OwnersSearchPage addNewOwner (String firstName, String lastName, String address, String city, int telephone){
         waitThenSendKeys(ownersAddNewFirstNameInput, firstName);
         waitThenSendKeys(ownersAddNewLastNameInput, lastName);
         waitThenSendKeys(ownersAddNewAddressInput, address);
         waitThenSendKeys(ownersAddNewCityInput, city);
         waitThenSendKeys(ownersAddNewTelephoneInput, String.valueOf(telephone));
         waitThenClick(ownersAddNewAddOwnerButton);
+        return new OwnersSearchPage(driver);
     }
 }
