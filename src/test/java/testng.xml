@@ -1,6 +1,20 @@
-<test>
-    <parameter name="firstName" value="firstName"/>
-    <parameter name="lastName" value="lastName"/>
-    <parameter name="specialty" value="surgery"/>
-</test>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
+<suite name="allTests">
+    <test name="APITests" >
+        <classes>
+            <class name="APITests" />
+        </classes>
+    </test>
+    <test name="UITests">
+        <classes>
+            <class name="UITests" />
+        </classes>
+    </test>
+    <test name="DatabaseTests">
+        <classes>
+            <class name="DatabaseTests" />
+        </classes>
+    </test>
+</suite>
