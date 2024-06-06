@@ -20,8 +20,8 @@ public class APITests {
     String lastNameEdited = "lastNameEdited";
 
 
-    @BeforeTest
-    public void beforeTest(){
+    @BeforeClass
+    public void beforeClass(){
         PropertiesUtils.loadEnvironmentConfiguration();
         System.out.println("Before test");
     }

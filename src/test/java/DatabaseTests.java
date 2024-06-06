@@ -18,14 +18,14 @@ public class DatabaseTests {
     String petType = "petType";
     String petTypeEdited = "petTypeEdited";
 
-    @BeforeTest
-    public void connectToDb(){
+    @BeforeClass
+    public void beforeClass(){
         PropertiesUtils.loadEnvironmentConfiguration();
         PostgresUtils.connectToDb();
         System.out.println("Before test");
     }
-    @AfterTest
-    public void disconnectFromDb(){
+    @AfterClass
+    public void afterClass() {
         PostgresUtils.disconnectFromDb();
         System.out.println("After test");
     }

@@ -28,14 +28,14 @@ public class UITests {
     String addressEdited = "addressEdited";
     int telephoneEdited = 987654321;
 
-    @BeforeTest
-    public void beforeTest(){
+    @BeforeClass
+    public void beforeClass(){
         PropertiesUtils.loadEnvironmentConfiguration();
         driver = DriverUtils.initDriver(PropertiesUtils.getBrowserName());
         System.out.println("Before test");
     }
-    @AfterTest
-    public void afterTest() {
+    @AfterClass
+    public void afterClass() {
         DriverUtils.quitDriver();
         System.out.println("After test");
     }
