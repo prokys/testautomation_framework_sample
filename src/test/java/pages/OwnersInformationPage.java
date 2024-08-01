@@ -21,8 +21,7 @@ public class OwnersInformationPage extends MainPage{
         waitThenClick(ownersInformationEditOwnerButton);
         return new OwnersEditPage(driver);
     }
-    public void checkOwnersInformation(String firstName, String lastName){
-        String fullName = ownersInformationFullName.getText();
-        Assert.assertEquals(fullName, firstName+" "+lastName);
+    public String checkOwnersInformation(String firstName, String lastName){
+        return ownersInformationFullName.getText();
     }
 }

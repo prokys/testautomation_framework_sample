@@ -32,20 +32,21 @@ public class UITests {
     public void beforeClass(){
         PropertiesUtils.loadEnvironmentConfiguration();
         driver = DriverUtils.initDriver(PropertiesUtils.getBrowserName());
-        System.out.println("Before test");
+        System.out.println("Before class");
     }
     @AfterClass
     public void afterClass() {
         DriverUtils.quitDriver();
-        System.out.println("After test");
+        System.out.println("After class");
     }
 
 
     @Test(groups = "createBeforeDeleteAfter")
-    public void searchForUser(){
+    public void searchForOwner(){
         loadMainPage();
         ownersSearchPage = mainPage.navigateToOwnersSearchPage();
-        ownersSearchPage.searchForOwnerAndCheckIfExists(firstName, lastName);
+        String fullName = ownersSearchPage.searchForOwnerAndReturnFullName(firstName, lastName);
+        Assert.assertEquals(fullName, firstName+" "+lastName);
         System.out.println("Owner named "+firstName+" "+lastName+" is in database");
     }
 
@@ -54,7 +55,8 @@ public class UITests {
         loadMainPage();
         ownersAddNewPage = mainPage.navigateToOwnersAddNewPage();
         ownersSearchPage = ownersAddNewPage.addNewOwner(firstName, lastName, address, city, telephone);
-        ownersSearchPage.searchForOwnerAndCheckIfExists(firstName, lastName);
+        String fullName = ownersSearchPage.searchForOwnerAndReturnFullName(firstName, lastName);
+        Assert.assertEquals(fullName, firstName+" "+lastName);
         System.out.println("Owner named "+firstName+" "+lastName+" created");
     }
 
@@ -62,11 +64,15 @@ public class UITests {
     public void editExistingOwner(){
         loadMainPage();
         ownersSearchPage = mainPage.navigateToOwnersSearchPage();
-        ownersSearchPage.searchForOwnerAndCheckIfExists(firstName, lastName);
+        String fullName = ownersSearchPage.searchForOwnerAndReturnFullName(firstName, lastName);
+        Assert.assertEquals(fullName, firstName+" "+lastName);
+
         ownersInformationPage = ownersSearchPage.navigateToOwnersInformationPage(firstName, lastName);
         ownersEditPage = ownersInformationPage.navigateToOwnersEditPage();
         ownersEditPage.editOwner(firstNameEdited, lastNameEdited, addressEdited, cityEdited, telephoneEdited);
-        ownersInformationPage.checkOwnersInformation(firstNameEdited, lastNameEdited);
+
+        fullName = ownersInformationPage.checkOwnersInformation(firstNameEdited, lastNameEdited);
+        Assert.assertEquals(fullName, firstNameEdited+" "+lastNameEdited);
         System.out.println("User edited to "+firstNameEdited+" "+lastNameEdited);
     }
     @BeforeMethod(onlyForGroups = "createBeforeDeleteAfter", inheritGroups = false)
