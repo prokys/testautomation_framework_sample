@@ -31,7 +31,7 @@ public class DriverUtils {
 
         // chrome options if needed
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("start-maximized");
+        chromeOptions.addArguments("start-maximized", "--search-engine-choice-country");
 
         try {
             driver = new ChromeDriver(chromeOptions);
