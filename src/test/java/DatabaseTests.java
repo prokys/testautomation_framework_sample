@@ -95,7 +95,7 @@ public class DatabaseTests {
     }
 
     /**
-     * Setup method to create pet type with API call
+     * Setup method for group createPetTypeBeforeDeleteAfter to create petType with API call
      */
     @BeforeMethod(onlyForGroups = "createPetTypeBeforeDeleteAfter", inheritGroups = false)
     public void createPetTypeBeforeMethod(){
@@ -105,7 +105,7 @@ public class DatabaseTests {
     }
 
     /**
-     * Teardown method to create pet type with API call
+     * Teardown method for group createPetTypeBeforeDeleteAfter and deletePetTypeAfter to delete petType with API call
      */
     @AfterMethod(onlyForGroups = {"createPetTypeBeforeDeleteAfter", "deletePetTypeAfter"}, inheritGroups = false)
     public void deletePetTypeAfterMethod(){

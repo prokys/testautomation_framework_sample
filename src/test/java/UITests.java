@@ -123,7 +123,7 @@ public class UITests {
         System.out.println("Before method");
     }
     /**
-     * Teardown method for groups createBeforeDeleteAfter and deleteOwnerAfter to connect to db, create owner and disconnect from db
+     * Teardown method for groups createBeforeDeleteAfter and deleteOwnerAfter to connect to db, delete owner and disconnect from db
      */
     @AfterMethod(onlyForGroups = {"createBeforeDeleteAfter", "deleteOwnerAfter"}, inheritGroups = false)
     public void deleteOwnerAfterMethod(){
